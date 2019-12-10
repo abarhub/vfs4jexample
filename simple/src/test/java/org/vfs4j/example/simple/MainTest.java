@@ -3,6 +3,8 @@ package org.vfs4j.example.simple;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +14,8 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     @BeforeEach
     void setUp() throws IOException {
@@ -24,6 +28,7 @@ class MainTest {
 
     @Test
     void main() throws IOException {
+        LOGGER.info("main");
         Main.main(null);
     }
 }
