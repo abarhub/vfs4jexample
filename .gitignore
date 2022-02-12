@@ -1,3 +1,4 @@
 # Project exclude paths
 /simple/target/
 /.idea/
+target
