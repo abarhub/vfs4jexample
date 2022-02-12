@@ -1,0 +1,1 @@
+java -DVFS_CONFIG=./conf/vfs.properties -Dlog4j2.configurationFile=./conf/log4j2.xml -jar simple/target/simple-0.1.0-SNAPSHOT-shaded.jar
