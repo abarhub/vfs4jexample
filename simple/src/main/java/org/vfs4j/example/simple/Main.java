@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         LOGGER.info("main");
 
         int noTest = 1;
@@ -31,6 +32,8 @@ public class Main {
 
         if (noTest == 1) {
             test1();
+        } else if (noTest == 2) {
+            test2();
         }
 
         LOGGER.info("Fin du programme");
@@ -85,6 +88,37 @@ public class Main {
         byte[] buf2 = VFS4JFiles.readAllBytes(file02);
         Verify.verify(Arrays.equals(buf, buf2));
         LOGGER.info("files {} and {} are equals", file2, file02);
+    }
+
+
+    private static void test2() throws IOException, InterruptedException {
+
+        VFS4JPathName file1 = VFS4JPaths.get("dir1", "fichier1.txt");
+        byte[] buf = "abc".getBytes(StandardCharsets.UTF_8);
+
+        // delet if exists
+        VFS4JFiles.deleteIfExists(file1);
+
+        // check not exist
+        Verify.verify(!VFS4JFiles.exists(file1));
+
+        // create files
+        VFS4JFiles.write(file1, buf);
+        LOGGER.info("create {}", file1);
+
+        // open file
+        InputStream input = VFS4JFiles.newInputStream(file1);
+
+        // file input not closed
+        input = null;
+
+        // free object
+        System.gc();
+
+        // wait
+        Thread.sleep(5_000);
+
+        LOGGER.info("end");
     }
 
 }
