@@ -2,3 +2,5 @@
 /simple/target/
 /.idea/
 target
+simple/workspace/dir1/*.txt
+simple/workspace/dir2/*.txt
